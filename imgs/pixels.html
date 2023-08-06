@@ -7,6 +7,34 @@
     <title>Individual Pixels</title>
 </head>
 <body>
+<script>
+    async function getPNGpixels(){
+        const reqOptions={'content-type': "application/json"}
+        await fetch('/pixels',reqOptions)
+           .then(res=>res.json())
+           .then(json=>{
+               pixelGrid(json.data)
+               console.log(json)
+           })
+           .catch(err=>console.log(err))
+    }
+
+    function pixelGrid(arr){
+        let s=''
+        let results=document.querySelector('#results')
+        for (let i=0; i<arr.length;i++){
+            s+=`<li>${arr[i]}</li>`
+        }
+        results.innerHTML=s;
+    }
+
+</script>
+
+<button onclick="getPNGpixels()">Get PNG pixels</button>
+<ol id="results">
+
+</ol>
+
     
 </body>
 </html>
