@@ -5,16 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Individual Pixels</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
 </head>
 <body>
 <script>
+
+function newClampedArr(data){
+        let d= new Uint8ClampedArray(data)
+        console.log(d)
+        return d
+    }
+function imageData(data){
+        var img= new ImageData(data,100)
+        console.log(img)
+    }
+
     async function getPNGpixels(){
-        const reqOptions={'content-type': "application/json"}
+        const reqOptions={'method':'GET', 'Headers': {'content-type': "application/json"}}
         await fetch('/pixels',reqOptions)
            .then(res=>res.json())
            .then(json=>{
-               pixelGrid(json.data)
-               console.log(json)
+               console.log(json.data)
+               pixelGrid(newClampedArr(json.data))
            })
            .catch(err=>console.log(err))
     }
@@ -28,12 +40,17 @@
         results.innerHTML=s;
     }
 
+  
+
 </script>
 
 <button onclick="getPNGpixels()">Get PNG pixels</button>
 <ol id="results">
 
 </ol>
+<canvas width="100">
+
+</canvas>
 
     
 </body>
