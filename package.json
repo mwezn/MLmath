@@ -5,7 +5,7 @@
   "main": "AIplot.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "nodemon server.js"
+    "start": "cd imgs && nodemon server.js"
   },
   "author": "",
   "license": "ISC",

@@ -14,7 +14,6 @@ server.get('/', (req, res)=>{
 })
 
 
-
 server.get('/pixels', (req, res)=>{
     res.json(pngFile)
 })
