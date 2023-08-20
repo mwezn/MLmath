@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="./embedding.js"></script>
+</head>
+<body>
+    <h1> Plotting different words as vectors using the 
+        D3.js library </h1>
+    <div id="Q"></div>
+        
+<script>
+     const w = 600;
+     const h = 600;
+     const padding=60;
+
+
+    const svg = d3.select("#Q")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h)
+                  
+    const xscale=d3.scaleLinear()
+      .domain([0,10])
+      .range([0+padding,w-padding]);
+    const yscale=d3.scaleLinear()
+      .domain([0,10])
+      .range([h-padding,0]);
+
+    svg.selectAll("circle")
+       .data(requiredVectors)
+       .enter()
+       .append("circle")
+       .attr("cx", (d)=> xscale(d[0]))
+       .attr("cy", (d)=> yscale(d[1]))
+       .attr("r", 2)
+       .attr("fill","blue")
+
+    
+    requiredVectors.forEach(element => {
+      svg.append("text")
+      .attr("x", xscale(element[0]))
+      .attr("y", yscale(element[1]))
+      .text(`${element[3]}`);
+      
+    });
+   const Xaxis=d3.axisBottom(xscale);
+   const Yaxis=d3.axisLeft(yscale);
+   svg.append("g")
+   .attr("transform", "translate(0, " + (h - padding) + ")")
+   .call(Xaxis);
+   svg.append("g")
+   .attr("transform", `translate(${padding}, ` + 0+ ")")
+   .call(Yaxis);
+
+</script>       
+    
+</body>
+</html>
