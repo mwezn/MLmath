@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="./embedding.js"></script>
+    <script src="./words.js"></script>
 </head>
 <body>
     <h1> Plotting different words as vectors using the 
@@ -25,14 +25,14 @@
                   .attr("height", h)
                   
     const xscale=d3.scaleLinear()
-      .domain([0,10])
+      .domain([-10,10])
       .range([0+padding,w-padding]);
     const yscale=d3.scaleLinear()
-      .domain([0,10])
+      .domain([-10,10])
       .range([h-padding,0]);
 
     svg.selectAll("circle")
-       .data(requiredVectors)
+       .data(shifted)
        .enter()
        .append("circle")
        .attr("cx", (d)=> xscale(d[0]))
@@ -40,14 +40,57 @@
        .attr("r", 2)
        .attr("fill","blue")
 
-    
-    requiredVectors.forEach(element => {
+    required.forEach((element, i)=> {
       svg.append("text")
-      .attr("x", xscale(element[0]))
-      .attr("y", yscale(element[1]))
-      .text(`${element[3]}`);
+      .attr("x", xscale(shifted[i][0])+30)
+      .attr("y", yscale(shifted[i][1]))
+      .text(`${element[2]}`);
+
+    })
+
+    
+    shifted.forEach(element => {
+    
+     
+
+      svg
+         .append('g')
+         .append('line')
+         .style('stroke', 'blue')
+         .attr("stroke-width",1)
+         .style('opacity',1)
+         .attr("x1",xscale(0))
+         .attr("y1",yscale(0))
+         .attr("x2", xscale(element[0]))
+         .attr("y2",yscale(element[1]))
       
     });
+
+    for(let i=-10;i<10;i++){
+      svg
+         .append('g')
+         .append('line')
+         .style('stroke', 'black')
+         .attr("stroke-width",1)
+         .style('opacity',1)
+         .attr("x1",xscale(i))
+         .attr("y1",yscale(-10))
+         .attr("x2", xscale(i))
+         .attr("y2",yscale(10))
+      svg
+         .append('g')
+         .append('line')
+         .style('stroke', 'black')
+         .attr("stroke-width",1)
+         .style('opacity',1)
+         .attr("x1",xscale(-10))
+         .attr("y1",yscale(i))
+         .attr("x2", xscale(10))
+         .attr("y2",yscale(i))
+
+    }
+
+    
    const Xaxis=d3.axisBottom(xscale);
    const Yaxis=d3.axisLeft(yscale);
    svg.append("g")
@@ -56,6 +99,8 @@
    svg.append("g")
    .attr("transform", `translate(${padding}, ` + 0+ ")")
    .call(Yaxis);
+
+   
 
 </script>       
     

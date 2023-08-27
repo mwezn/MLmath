@@ -18,14 +18,15 @@ function dotProduct(a,b){
 
 //Gender Age Royalty
 const man= [1,7,1,"man"]
+const adult=[5,7,1,"adult"]
 const woman=[9,7,1,"woman"]
 const boy=[1,2,1, "boy"]
 const girl=[9,2,1, "girl"]
-const king=[1,8,8]
-const queen=[9,7,8]
-const prince=[1,2,8]
-const princess=[9,2,8]
-const castle=[5,9,8]
+const king=[1,8,8,"king"]
+const queen=[9,8,8,"queen"]
+const prince=[1,2,8,"prince"]
+const princess=[9,2,8,"princess"]
+const castle=[5,9,8,"castle"]
 //To find which words are similar? calculate cosine angle
 //between the vectors
 
@@ -35,6 +36,17 @@ function addVector(A,B){
         res[i]=A[i]+B[i]
     }
     return res
+}
+
+
+function subtractVectorMean(A){
+  let res=[]
+  let mean=zeroMean()
+  for(let i=0;i<A.length-1;i++){
+    res[i]=A[i]-mean[i]
+
+  }
+  return res
 }
 
 
@@ -57,28 +69,32 @@ function createVectorAdder() {
       }
   
       vectors.forEach(vector => {
-        for (let i = 0; i < vector.length; i++) {
+        for (let i = 0; i <vector.length; i++) {
           sumVector[i] += vector[i];
         }
       });
   
-      return sumVector;
+      return sumVector.filter(d=>!isNaN(d));
     };
   }
 
 function zeroMean(){
     const addVectors = createVectorAdder();
-    const sumVector = addVectors(man,woman,boy,girl,king,queen,prince,princess,castle);
-    let res=sumVector.map(d=>d/9.0)
+    const sumVector = addVectors(man,adult,woman,boy,girl,king,queen,prince,princess,castle);
+    let res=sumVector.map(d=>d/10.0)
     return res;
 }
 
-//console.log(zeroMean())
+console.log(zeroMean())
+console.log(man)
+console.log(subtractVectorMean(man))
 
 
   
-const requiredVectors=[man,woman,boy,girl]
-console.log(requiredVectors)
+const requiredVectors=[man,adult,woman,boy,girl,king,queen]
+const zeroVectors= requiredVectors.map(d=>subtractVectorMean(d))
+
+console.log(zeroVectors)
 
 
 
