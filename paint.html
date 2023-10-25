@@ -1,16 +1,20 @@
 <html>
 <body>
-<button onclick="clickMe()">Export image</button>
+
 <canvas id="grid"></canvas>
 
+
 <script src="draw.js"></script>
+<button onclick="clickMe()">Export image</button>
 <script>
     
 
     const clickMe =()=>{
         let canvas=document.getElementById('grid')
-        let url= canvas.toDataURL()
-        console.log(url)
+        
+        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+        console.log(image)
+        window.location.href=image
     }
 </script>
 

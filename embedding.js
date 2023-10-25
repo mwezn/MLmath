@@ -9,6 +9,8 @@
 
 function dotProduct(a,b){
     let total=0;
+    a=a.filter(d=>!isNaN(d));
+    b=b.filter(d=>!isNaN(d))
     for (let i=0;i<a.length;i++){
         total+=a[i]*b[i]
     }
@@ -29,14 +31,6 @@ const princess=[9,2,8,"princess"]
 const castle=[5,9,8,"castle"]
 //To find which words are similar? calculate cosine angle
 //between the vectors
-
-function addVector(A,B){
-    let res=[]
-    for(let i=0;i<A.length;i++){
-        res[i]=A[i]+B[i]
-    }
-    return res
-}
 
 
 function subtractVectorMean(A){
@@ -99,7 +93,7 @@ console.log(zeroVectors)
 
 
 
-/*const cosTheta= (A,B)=>dotProduct(A,B)/(Math.sqrt(dotProduct(A,A)*dotProduct(B,B)))
+const cosTheta= (A,B)=>dotProduct(A,B)/(Math.sqrt(dotProduct(A,A)*dotProduct(B,B)))
 console.log(cosTheta(man,man))
 console.log(cosTheta(man,woman))
 console.log(cosTheta(man,boy))
@@ -108,7 +102,7 @@ console.log(cosTheta(man,king))
 console.log(cosTheta(man,queen))
 console.log(cosTheta(man,prince))
 console.log(cosTheta(man,princess))
-console.log(cosTheta(man,castle))*/
+console.log(cosTheta(man,castle))
 
 //console.log(addVector(man,man))
 

@@ -10,6 +10,9 @@ function XYPlotter(id) {
     this.yMin = 0;
     this.canvas.width=1000;
     this.canvas.height=500;
+    this.ctx.fillStyle="orange";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    console.log(this.ctx,this.ctx.fillStyle)
     this.xMax = this.canvas.width;
     this.yMax = this.canvas.height;
     this.drawing= true;
@@ -50,7 +53,7 @@ function XYPlotter(id) {
     
     
     this.plotLine(0,0,this.canvas.width,this.canvas.height,'black')
-    this.plotLine(0,f(0),this.canvas.width,f(this.canvas.width),'blue')
+    //this.plotLine(0,f(0),this.canvas.width,f(this.canvas.width),'blue')
     //this.transformXY()
     } // End Plotter Object 
     let myPlotter = new XYPlotter("grid");
@@ -78,7 +81,6 @@ function XYPlotter(id) {
     };
     
     document.addEventListener('mousemove',(e)=> handleMousemove(e));
-    /*document.addEventListener('mousedown',()=>{
+    document.addEventListener('mousedown',()=>{
         myPlotter.drawing=!myPlotter.drawing
-    })*/
-    
+    })
