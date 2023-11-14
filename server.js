@@ -3,7 +3,7 @@ const express= require('express')
 
 const app=express();
 
-const trainData= fs.readFileSync('./mnist/mnist_train.csv',"utf-8")
+const trainData= fs.readFileSync('./mnist_small_train.csv',"utf-8")
 const trainArr= new Array(trainData)
 
 let results=trainArr[0].split("\n")
